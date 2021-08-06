@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Boian\\source\\repos\\HackerRank\\HackerRank\\HackerRank.csproj",
+      "projectUniqueName": "C:\\Users\\Boian\\Documents\\GitHub\\HackerRankSolutions\\HackerRank\\HackerRank\\HackerRank.csproj",
       "projectName": "HackerRank",
-      "projectPath": "C:\\Users\\Boian\\source\\repos\\HackerRank\\HackerRank\\HackerRank.csproj",
+      "projectPath": "C:\\Users\\Boian\\Documents\\GitHub\\HackerRankSolutions\\HackerRank\\HackerRank\\HackerRank.csproj",
       "packagesPath": "C:\\Users\\Boian\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Boian\\source\\repos\\HackerRank\\HackerRank\\obj\\",
+      "outputPath": "C:\\Users\\Boian\\Documents\\GitHub\\HackerRankSolutions\\HackerRank\\HackerRank\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
