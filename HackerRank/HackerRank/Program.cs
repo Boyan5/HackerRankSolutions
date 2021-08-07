@@ -85,6 +85,12 @@ namespace ConsoleApp3
             miniMaxSum(arrMiniMaxSum);
             #endregion
 
+            //9 birthdayCakeCandles 
+            #region
+            int[] arrBirthdayCakeCandles = new int[] { 3, 2, 1, 3 };
+            Console.WriteLine(birthdayCakeCandles(arrBirthdayCakeCandles));
+            #endregion
+
         }
 
         static int solveMeFirst(int a, int b)
@@ -234,7 +240,29 @@ namespace ConsoleApp3
             }
             sumMin -= max;
 
-            Console.Write(sumMin + " " + sumMax);
+            Console.WriteLine(sumMin + " " + sumMax);
+
+        }
+
+        static int birthdayCakeCandles(int[] ar)
+        {
+            int counter = 0;
+            int max = ar[0];
+            for (int i = 0; i < ar.Length; i++)
+            {
+                if (ar[i] > max)
+                {
+                    max = ar[i];
+                }
+            }
+            for (int i = 0; i < ar.Length; i++)
+            {
+                if (ar[i] == max)
+                {
+                    counter++;
+                }
+            }
+            return counter;
 
         }
     }
