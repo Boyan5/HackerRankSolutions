@@ -74,6 +74,17 @@ namespace ConsoleApp3
             plusMinus(arrPlusMinus);
             #endregion
 
+            //7 staircase
+            #region
+            staircase(6);
+            #endregion
+
+            //8 miniMaxSum
+            #region
+            int[] arrMiniMaxSum = new int[] { 1, 2, 3, 4, 5 };
+            miniMaxSum(arrMiniMaxSum);
+            #endregion
+
         }
 
         static int solveMeFirst(int a, int b)
@@ -168,6 +179,62 @@ namespace ConsoleApp3
             Console.WriteLine(Math.Round(countPositive * temp, 6));
             Console.WriteLine(Math.Round(countNegative * temp, 6));
             Console.WriteLine(Math.Round(countZeros * temp, 6));
+
+        }
+
+        static void staircase(int n)
+        {
+            for (int i = n - 1; i >= 0; i--)
+            {
+                for (int j = 0; j < n; j++)
+                {
+                    if (j >= i)
+                    {
+                        Console.Write("#");
+                    }
+                    else
+                    {
+                        Console.Write(" ");
+                    }
+                }
+                Console.WriteLine();
+            }
+
+
+        }
+
+        static void miniMaxSum(int[] arr)
+        {
+            long sumMax = 0;
+            long sumMin = 0;
+            long n = arr.Length;
+            long max = arr[0];
+            long min = arr[0];
+            for (int i = 0; i < n; i++)
+            {
+                if (arr[i] < min)
+                {
+                    min = arr[i];
+                }
+                if (arr[i] > max)
+                {
+                    max = arr[i];
+                }
+            }
+            for (int i = 0; i < n; i++)
+            {
+                sumMax += arr[i];
+
+            }
+            sumMax -= min;
+            for (int i = 0; i < n; i++)
+            {
+                sumMin += arr[i];
+
+            }
+            sumMin -= max;
+
+            Console.Write(sumMin + " " + sumMax);
 
         }
     }
