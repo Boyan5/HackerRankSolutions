@@ -91,6 +91,36 @@ namespace ConsoleApp3
             Console.WriteLine(birthdayCakeCandles(arrBirthdayCakeCandles));
             #endregion
 
+            //10 timeConvresion
+            #region
+            string stringtimeConversion = "07:05:45PM";
+            Console.WriteLine(timeConversion(stringtimeConversion));
+            #endregion
+
+            //11 gradingStudents
+            #region
+            List<int> listgradingStudents = new List<int>();
+            listgradingStudents.Add(73);
+            listgradingStudents.Add(67);
+            listgradingStudents.Add(38);
+            listgradingStudents.Add(33);
+
+            foreach (var LGS in gradingStudents(listgradingStudents))
+                Console.WriteLine(LGS);
+            #endregion
+
+            //12 countApplesAndOranges
+            #region
+            int sAaO = 7;
+            int tAaO = 11;
+            int aAaO = 5;
+            int bAaO = 15;
+            int[] apples = new int[] { -2, 2, 1 };
+            int[] oranges = new int[] { 5, -6 };
+
+            countApplesAndOranges(sAaO, tAaO, aAaO, bAaO, apples, oranges);
+            #endregion
+
         }
 
         static int solveMeFirst(int a, int b)
@@ -263,6 +293,79 @@ namespace ConsoleApp3
                 }
             }
             return counter;
+
+        }
+
+        static string timeConversion(string s)
+        {
+            string firstTwo = s.Substring(0, 2);
+            string lastTwo = s.Substring(s.Length - 2);
+            string others = s.Substring(2, s.Length - 4);
+            if (lastTwo.Equals("AM"))
+            {
+                if (firstTwo.Equals("12"))
+                    firstTwo = "00";
+                return firstTwo + others;
+            }
+            else
+            {
+                if (!firstTwo.Equals("12"))
+                {
+                    int hours = Int32.Parse(firstTwo);
+                    hours += 12;
+                    firstTwo = "" + hours;
+                }
+                return firstTwo + others;
+            }
+
+        }
+
+        public static List<int> gradingStudents(List<int> grades)
+        {
+            for (int i = 0; i < grades.Count; i++)
+            {
+                if (grades[i] < 38)
+                {
+                    grades[i] += 0;
+                }
+                else
+                {
+                    if (grades[i] % 5 > 2)
+                    {
+                        while (!(grades[i] % 5 == 0))
+                        {
+                            grades[i]++;
+                        }
+                    }
+                }
+            }
+            return grades;
+
+        }
+
+        static void countApplesAndOranges(int s, int t, int a, int b, int[] apples, int[] oranges)
+        {
+            int applesCounter = 0;
+            int orangesCounter = 0;
+            for (int i = 0; i < apples.Length; i++)
+            {
+                if ((a + apples[i] >= s) && (a + apples[i] <= t))
+                {
+                    applesCounter++;
+                }
+
+            }
+
+            for (int i = 0; i < oranges.Length; i++)
+            {
+                if (s <= b + oranges[i] && b + oranges[i] <= t)
+                {
+                    orangesCounter++;
+                }
+
+            }
+            Console.WriteLine(applesCounter);
+            Console.WriteLine(orangesCounter);
 
         }
     }
