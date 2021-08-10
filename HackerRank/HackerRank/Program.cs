@@ -167,6 +167,42 @@ namespace ConsoleApp3
                 Console.Write(resultBreakingRecords + " ");
             #endregion
 
+            //16 birthday
+            #region
+            Console.WriteLine("Birthday");
+            List<int> listBirthday = new List<int>();
+            listBirthday.Add(1);
+            listBirthday.Add(2);
+            listBirthday.Add(1);
+            listBirthday.Add(3);
+            listBirthday.Add(2);
+            int dBirthday = 3;
+            int mBirthday = 2;
+            Console.WriteLine(birthday(listBirthday, dBirthday, mBirthday));
+            #endregion
+
+            //17 divisibleSumPairs
+            #region
+            Console.WriteLine("Divisible Sum Pairs");
+            int nDivisibleSumPairs = 6;
+            int kDivisibleSumpairs = 3;
+            int[] arDivisibleSumPairs = new int[] { 1, 3, 2, 6, 1, 2 };
+            Console.WriteLine(divisibleSumPairs(nDivisibleSumPairs, kDivisibleSumpairs, arDivisibleSumPairs));
+            #endregion
+
+            //18 migratoryBirds 
+            #region
+            Console.WriteLine("Migratory Birds");
+            List<int> listMigratoryBirds = new List<int>();
+            listMigratoryBirds.Add(1);
+            listMigratoryBirds.Add(4);
+            listMigratoryBirds.Add(4);
+            listMigratoryBirds.Add(4);
+            listMigratoryBirds.Add(5);
+            listMigratoryBirds.Add(3);
+            Console.WriteLine(migratoryBirds(listMigratoryBirds));
+            #endregion
+
         }
 
         static int solveMeFirst(int a, int b)
@@ -492,6 +528,55 @@ namespace ConsoleApp3
             }
 
             return new int[] { counterHighest, counterLowest };
+        }
+
+        static int birthday(List<int> s, int d, int m)
+        {
+            int total = 0;
+            for (int i = 0; i <= s.Count - m; i++)
+            {
+                var segsSum = s.GetRange(i, m).Aggregate((a, b) => a + b);
+                if (segsSum == d)
+                {
+                    total++;
+                }
+            }
+            return total;
+        }
+
+        static int divisibleSumPairs(int n, int k, int[] ar)
+        {
+            int counter = 0;
+            for (int j = 0; j < n; j++)
+            {
+                for (int i = 1; i < n - j; i++)
+                {
+                    if ((ar[j] + ar[i + j]) % k == 0)
+                    {
+                        counter++;
+                    }
+                }
+            }
+            return counter;
+        }
+
+        static int migratoryBirds(List<int> arr)
+        {
+            int n = arr.Count;
+            int[] ary = new int[n];
+            for (int i = 0; i < n; i++)
+                ary[arr[i]]++;
+            int max = 0, maxpos = 0;
+            for (int i = 0; i < n; i++)
+            {
+                if (ary[i] > max)
+                {
+                    max = ary[i];
+                    maxpos = i;
+                }
+            }
+            return maxpos;
+
         }
     }
 }
