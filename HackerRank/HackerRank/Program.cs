@@ -203,6 +203,33 @@ namespace ConsoleApp3
             Console.WriteLine(migratoryBirds(listMigratoryBirds));
             #endregion
 
+            //19 dayOfProgrammer
+            #region
+            Console.WriteLine("Day of Programmer");
+            Console.WriteLine(dayOfProgrammer(2017));
+            #endregion
+
+            //20 bonAppetit
+            #region
+            Console.WriteLine("Bon Appetit");
+            List<int> listBonAppetit = new List<int>();
+            listBonAppetit.Add(3);
+            listBonAppetit.Add(10);
+            listBonAppetit.Add(2);
+            listBonAppetit.Add(9);
+            int kBonAppetit = 1;
+            int bBonAppetit = 12;
+            bonAppetit(listBonAppetit, kBonAppetit, bBonAppetit);
+            #endregion
+
+            //21 sockMerchant
+            #region
+            Console.WriteLine("Sock Merchant");
+            int nSockMerchant = 9;
+            int[] arSockMerchant = new int[] { 10, 20, 20, 10, 10, 30, 50, 10, 20, };
+            Console.WriteLine(sockMerchant(nSockMerchant, arSockMerchant));
+            #endregion
+
         }
 
         static int solveMeFirst(int a, int b)
@@ -577,6 +604,57 @@ namespace ConsoleApp3
             }
             return maxpos;
 
+        }
+
+        static string dayOfProgrammer(int year)
+        {
+            if (year == 1918)
+            {
+                return "26.09." + year;
+            }
+            else if ((year >= 1700 && year <= 1917 && year % 4 == 0) || (year > 1918 && (year % 400 == 0 || year % 4 == 0 && year % 100 != 0)))
+            {
+                return "12.09." + year;
+            }
+            else
+            {
+                return "13.09." + year;
+            }
+        }
+
+        static void bonAppetit(List<int> bill, int k, int b)
+        {
+            int fullBill = 0;
+            for (int i = 0; i < bill.Count; i++)
+            {
+                fullBill += bill[i];
+
+            }
+            int billActual = (fullBill - bill[k]) / 2;
+            if (b == billActual)
+            {
+                Console.WriteLine("Bon Appetit");
+            }
+            else
+            {
+                Console.WriteLine(b - billActual);
+            }
+
+
+
+        }
+
+        static int sockMerchant(int n, int[] ar)
+        {
+            int pairs = 0;
+            int[] colorsCount = ar.GroupBy(x => x).
+                        Select(x => x.Count()).
+                        ToArray();
+            foreach (int count in colorsCount)
+            {
+                pairs += ((count - (count % 2)) / 2);
+            }
+            return pairs;
         }
     }
 }
