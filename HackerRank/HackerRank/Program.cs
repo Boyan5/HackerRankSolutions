@@ -230,6 +230,31 @@ namespace ConsoleApp3
             Console.WriteLine(sockMerchant(nSockMerchant, arSockMerchant));
             #endregion
 
+            //22 pageCount
+            #region
+            Console.WriteLine("Page Count");
+            int nPageCount = 6;
+            int pPageCount = 2;
+            Console.WriteLine(pageCount(nPageCount,pPageCount));
+            #endregion
+
+            //23 countingValleys 
+            #region
+            Console.WriteLine("Counting Valleys");
+            int nCountingValleys = 8;
+            string sCountingValleys = "UDDDUDUU";
+            Console.WriteLine(countingValleys(nCountingValleys, sCountingValleys));
+            #endregion
+
+            //24 getMoneySpent
+            #region
+            Console.WriteLine("Get Money Spent");
+            int[] keyboards = new int[] { 3, 1 };
+            int[] drives = new int[] { 5, 2, 8 };
+            int bgetMoneySpent = 10;
+            Console.WriteLine(getMoneySpent(keyboards, drives, bgetMoneySpent));
+            #endregion
+
         }
 
         static int solveMeFirst(int a, int b)
@@ -655,6 +680,57 @@ namespace ConsoleApp3
                 pairs += ((count - (count % 2)) / 2);
             }
             return pairs;
+        }
+
+        static int pageCount(int n, int p)
+        {
+            int totalPageTurnCountFromFront = n / 2;
+            int targetPageTurnCountFromFront = p / 2;
+            int targetPageTurnCountFromBack = totalPageTurnCountFromFront - targetPageTurnCountFromFront;
+
+            return Math.Min(targetPageTurnCountFromFront, targetPageTurnCountFromBack);
+
+        }
+
+        static int countingValleys(int n, string s)
+        {
+            int altitude = 0;
+            int valleys = 0;
+
+            for (int i = 0; i < n; i++)
+            {
+                if (s[i].Equals('U'))
+                {
+                    if (altitude == -1)
+                    {
+                        valleys++;
+                    }
+                    altitude++;
+                }
+
+                if (s[i].Equals('D'))
+                {
+                    altitude--;
+                }
+            }
+
+            return valleys;
+        }
+
+        static int getMoneySpent(int[] keyboards, int[] drives, int b)
+        {
+            int max = -1;
+            for (int i = 0; i < keyboards.Length; i++)
+            {
+                for (int j = 0; j < drives.Length; j++)
+                {
+                    if ((keyboards[i] + drives[j] > max) && keyboards[i] + drives[j] <= b)
+                    {
+                        max = keyboards[i] + drives[j];
+                    }
+                }
+            }
+            return max;
         }
     }
 }
