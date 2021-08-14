@@ -255,6 +255,35 @@ namespace ConsoleApp3
             Console.WriteLine(getMoneySpent(keyboards, drives, bgetMoneySpent));
             #endregion
 
+            //25 catAndMouse
+            #region
+            Console.WriteLine("Cat and Mouse");
+            int xCaM = 1;
+            int yCaM = 2;
+            int zCaM = 3;
+            Console.WriteLine(catAndMouse(xCaM, yCaM, zCaM));
+            #endregion
+
+            //26 formingMagicSquare
+            #region
+            Console.WriteLine("Forming Magic Square");
+            int[][] sFormingMagicSquare = new int[][] { new int[]{ 4, 9, 2 }, new int[] { 3, 5, 7 }, new int[] { 8, 1, 5 } };
+            Console.WriteLine(formingMagicSquare(sFormingMagicSquare));
+            #endregion
+
+            //27 pickingNumbers
+            #region
+            Console.WriteLine("Picking Numbers");
+            List<int> aPickingNumbers = new List<int>();
+            aPickingNumbers.Add(4);
+            aPickingNumbers.Add(6);
+            aPickingNumbers.Add(5);
+            aPickingNumbers.Add(3);
+            aPickingNumbers.Add(3);
+            aPickingNumbers.Add(1);
+            Console.WriteLine(pickingNumbers(aPickingNumbers));
+            #endregion
+
         }
 
         static int solveMeFirst(int a, int b)
@@ -731,6 +760,63 @@ namespace ConsoleApp3
                 }
             }
             return max;
+        }
+
+        static string catAndMouse(int x, int y, int z)
+        {
+            if (Math.Abs(x - z) < Math.Abs(y - z))
+            {
+                return "Cat A";
+            }
+            else if (Math.Abs(x - z) > Math.Abs(y - z))
+            {
+                return "Cat B";
+            }
+            else
+            {
+                return "Mouse C";
+            }
+        }
+
+        static int formingMagicSquare(int[][] s)
+        {
+            int cost = Int32.MaxValue;
+            int[,] t = new int[,]
+                    {
+                        {4,9,2,3,5,7,8,1,6},
+                        {4,3,8,9,5,1,2,7,6},
+                        {2,9,4,7,5,3,6,1,8},
+                        {2,7,6,9,5,1,4,3,8},
+                        {8,1,6,3,5,7,4,9,2},
+                        {8,3,4,1,5,9,6,7,2},
+                        {6,7,2,1,5,9,8,3,4},
+                        {6,1,8,7,5,3,2,9,4},
+                    };
+            int temp = 0;
+            for (int i = 0; i < 8; i++)
+            {
+                temp = Math.Abs(s[0][0] - t[i, 0]) + Math.Abs(s[0][1] - t[i, 1]) + Math.Abs(s[0][2] - t[i, 2]) + Math.Abs(s[1][0] - t[i, 3]) + Math.Abs(s[1][1] - t[i, 4]) + Math.Abs(s[1][2] - t[i, 5]) + Math.Abs(s[2][0] - t[i, 6]) + Math.Abs(s[2][1] - t[i, 7]) + Math.Abs(s[2][2] - t[i, 8]);
+                cost = temp < cost ? temp : cost;
+            }
+            return cost;
+        }
+
+        public static int pickingNumbers(List<int> a)
+        {
+            int[] frequency = new int[101];
+            int result = Int32.MinValue;
+
+            for (int i = 0; i < a.Count; i++)
+            {
+                int index = a[i];
+                frequency[index]++;
+            }
+
+            for (int i = 1; i <= 100; i++)
+            {
+                result = Math.Max(result, frequency[i] + frequency[i - 1]);
+            }
+            return result;
         }
     }
 }
