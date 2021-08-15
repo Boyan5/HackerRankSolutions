@@ -284,6 +284,29 @@ namespace ConsoleApp3
             Console.WriteLine(pickingNumbers(aPickingNumbers));
             #endregion
 
+            //28 hurdleRace
+            #region
+            Console.WriteLine("Hurdle Race");
+            int kHurdleRace = 4;
+            int[] heightHurdleRace = new int[] { 1, 6, 3, 5, 2 };
+            Console.WriteLine(hurdleRace(kHurdleRace, heightHurdleRace));
+            #endregion
+
+            //29 designerPDFViewer
+            #region
+            Console.WriteLine("Designer PDF Viewer");
+            int[] hDesignerPDFViewer = new int[] { 1, 3, 1, 3, 1, 4, 1, 3, 2, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,};
+            string wordDesignerPDFViewer = "abc";
+            Console.WriteLine(designerPdfViewer(hDesignerPDFViewer, wordDesignerPDFViewer));
+            #endregion
+
+            //30 utopianTree
+            #region
+            Console.WriteLine("Utopian Tree");
+            int nUtopianTree = 0;
+            Console.WriteLine(utopianTree(nUtopianTree));
+            #endregion
+
         }
 
         static int solveMeFirst(int a, int b)
@@ -817,6 +840,63 @@ namespace ConsoleApp3
                 result = Math.Max(result, frequency[i] + frequency[i - 1]);
             }
             return result;
+        }
+
+        static int hurdleRace(int k, int[] height)
+        {
+            int max = k;
+            for (int i = 0; i < height.Length; i++)
+            {
+                if (height[i] > max)
+                {
+                    max = height[i];
+                }
+            }
+            return max - k;
+        }
+
+        static int designerPdfViewer(int[] h, string word)
+        {
+            char[] letters = new char[] { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
+            int[] indexes = new int[word.Length];
+            for (int i = 0; i < word.Length; i++)
+            {
+                for (int j = 0; j < letters.Length; j++)
+                {
+                    if (word[i].Equals(letters[j]))
+                    {
+                        indexes[i] = j;
+                    }
+                }
+            }
+            int max = h[0];
+            for (int i = 0; i < word.Length; i++)
+            {
+                if (h[indexes[i]] > max)
+                {
+                    max = h[indexes[i]];
+                }
+            }
+            return max * word.Length;
+        }
+
+        static int utopianTree(int n)
+        {
+            int i = 0;
+            int sum = 0;
+            while (i <= n)
+            {
+                if (i % 2 == 0)
+                {
+                    sum += 1;
+                }
+                else
+                {
+                    sum *= 2;
+                }
+                i++;
+            }
+            return sum;
         }
     }
 }
