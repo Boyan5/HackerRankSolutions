@@ -307,6 +307,31 @@ namespace ConsoleApp3
             Console.WriteLine(utopianTree(nUtopianTree));
             #endregion
 
+            //31 angryProfessor
+            #region
+            Console.WriteLine("Angry Professor");
+            int kAngryProfessor = 3;
+            int[] aAngryProfessor = new int[] { -1, -3, 4, 2 };
+            Console.WriteLine(angryProfessor(kAngryProfessor, aAngryProfessor));
+            #endregion
+
+            //32 beautifulDays 
+            #region
+            Console.WriteLine("Beautiful Days");
+            int iBeautifulDays = 20;
+            int jBeautifulDays = 23;
+            int kBeautifulDays = 6;
+            Console.WriteLine(beautifulDays(iBeautifulDays, jBeautifulDays, kBeautifulDays));
+            #endregion
+
+            //33 viralAdvertising
+            #region
+            Console.WriteLine("Viral Advertising");
+            int nViralAdvertising = 3;
+            Console.WriteLine(viralAdvertising(nViralAdvertising));
+            #endregion
+
+
         }
 
         static int solveMeFirst(int a, int b)
@@ -897,6 +922,60 @@ namespace ConsoleApp3
                 i++;
             }
             return sum;
+        }
+
+        static string angryProfessor(int k, int[] a)
+        {
+            int counter = 0;
+            for (int i = 0; i < a.Length; i++)
+            {
+                if (a[i] < 1)
+                {
+                    counter++;
+                }
+            }
+            return counter >= k ? "NO" : "YES";
+        }
+
+        #region
+        static int beautifulDays(int i, int j, int k)
+        {
+            int counter = 0;
+            for (int c = i; c <= j; c++)
+            {
+                if (Math.Abs(c - reverseInt(c)) % k == 0)
+                {
+                    counter++;
+                }
+            }
+            return counter;
+        }
+
+        static int reverseInt(int number)
+        {
+            int reverse = 0;
+            while (number != 0)
+            {
+                reverse = 10 * reverse + number % 10;
+                number = number / 10;
+            }
+            reverse += number;
+            return reverse;
+        }
+        #endregion
+
+        static int viralAdvertising(int n)
+        {
+            int shared = 5;
+            int liked = 0;
+            int cumulative = 0;
+            for (int i = 0; i < n; i++)
+            {
+                liked = shared / 2;
+                cumulative += liked;
+                shared = liked * 3;
+            }
+            return cumulative;
         }
     }
 }
