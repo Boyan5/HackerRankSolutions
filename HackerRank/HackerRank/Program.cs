@@ -331,6 +331,33 @@ namespace ConsoleApp3
             Console.WriteLine(viralAdvertising(nViralAdvertising));
             #endregion
 
+            //37 saveThePrisoner
+            #region
+            Console.WriteLine("Save the Prisoner");
+            int nSavethePrisoner = 5;
+            int mSavethePrisoner = 2;
+            int sSavethePrisoner = 1;
+            Console.WriteLine(saveThePrisoner(nSavethePrisoner, mSavethePrisoner, sSavethePrisoner));
+            #endregion
+
+            //38 circularArrayRotation
+            #region
+            Console.WriteLine("Circular Array Rotation");
+            int[] aCircularArrayRotation = new int[] { 1, 2, 3 };
+            int kCircularArrayRotation = 2;
+            int[] queriesCircularArrayRotation = new int[] { 0, 1, 2 };
+            foreach (var CAR in circularArrayRotation(aCircularArrayRotation, kCircularArrayRotation, queriesCircularArrayRotation))
+                Console.WriteLine(CAR);
+            #endregion
+
+            //39 jumpingOnClouds
+            #region
+            Console.WriteLine("Jumping On Clouds");
+            int[] cJumpingOnClouds = new int[] { 0, 0, 1, 0, 0, 1, 1, 0 };
+            int kJumpingOnClouds = 2;
+            Console.WriteLine(jumpingOnClouds(cJumpingOnClouds, kJumpingOnClouds));
+            #endregion
+
 
         }
 
@@ -976,6 +1003,41 @@ namespace ConsoleApp3
                 shared = liked * 3;
             }
             return cumulative;
+        }
+
+        static int saveThePrisoner(int n, int m, int s)
+        {
+            return ((m + s - 2) % n) + 1;
+        }
+
+        static int[] circularArrayRotation(int[] a, int k, int[] queries)
+        {
+            int[] newArr = new int[a.Length];
+            int[] indices = new int[queries.Length];
+            for (int i = 0; i < newArr.Length; i++)
+            {
+                newArr[(i + k) % a.Length] = a[i];
+            }
+
+            for (int i = 0; i < indices.Length; i++)
+            {
+                indices[i] = newArr[queries[i]];
+            }
+            return indices;
+        }
+
+        static int jumpingOnClouds(int[] c, int k)
+        {
+            int n = c.Length;
+            int energy = 100;
+            int i = k % n;
+            energy -= c[i] * 2 + 1;
+            while (i != 0)
+            {
+                i = (i + k) % n;
+                energy -= c[i] * 2 + 1;
+            }
+            return energy;
         }
     }
 }
