@@ -358,6 +358,33 @@ namespace ConsoleApp3
             Console.WriteLine(jumpingOnClouds(cJumpingOnClouds, kJumpingOnClouds));
             #endregion
 
+            //40 findDigits
+            #region
+            Console.WriteLine("Find Digits");
+            int nFindDigits = 12;
+            Console.WriteLine(findDigits(nFindDigits));
+            #endregion
+
+            //41 squares
+            #region
+            Console.WriteLine("Squares");
+            int aSquares = 17;
+            int bSquares = 24;
+            Console.WriteLine(squares(aSquares, bSquares));
+            #endregion
+
+            //42 libraryFine
+            #region
+            Console.WriteLine("Library Fine");
+            int d1LibraryFine = 9;
+            int m1LibraryFine = 6;
+            int y1LibraryFine = 2015;
+            int d2LibraryFine = 6;
+            int m2LibraryFine = 6;
+            int y2LibraryFine = 2015;
+            Console.WriteLine(libraryFine(d1LibraryFine, m1LibraryFine, y1LibraryFine, d2LibraryFine, m2LibraryFine, y2LibraryFine));
+            #endregion
+
 
         }
 
@@ -1038,6 +1065,53 @@ namespace ConsoleApp3
                 energy -= c[i] * 2 + 1;
             }
             return energy;
+        }
+
+        static int findDigits(int n)
+        {
+            int counter = 0;
+            int copied = n;
+            while (copied != 0)
+            {
+                if (copied % 10 != 0 && n % (copied % 10) == 0)
+                    counter++;
+                copied /= 10;
+            }
+            return counter;
+        }
+
+        static int squares(int a, int b)
+        {
+            int start = (int)Math.Ceiling(Math.Sqrt(a));
+            int end = (int)Math.Floor(Math.Sqrt(b));
+            return end - start + 1;
+        }
+
+        public static int libraryFine(int d1, int m1, int y1, int d2, int m2, int y2)
+        {
+            int fine = 0;
+            if (y1 > y2)
+            {
+                fine = 10000;
+                return fine;
+            }
+            else if (y1 < y2)
+                return fine;
+
+            else
+            {
+                if (m1 > m2)
+                    fine = 500 * (m1 - m2);
+                else if (m1 < m2)
+                    return fine;
+                else
+                {
+                    if (d1 > d2)
+                        fine = 15 * (d1 - d2);
+                }
+
+            }
+            return fine;
         }
     }
 }
