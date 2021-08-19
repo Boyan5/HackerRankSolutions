@@ -385,6 +385,29 @@ namespace ConsoleApp3
             Console.WriteLine(libraryFine(d1LibraryFine, m1LibraryFine, y1LibraryFine, d2LibraryFine, m2LibraryFine, y2LibraryFine));
             #endregion
 
+            //43 cutTheSticks
+            #region
+            Console.WriteLine("Cut the Sticks");
+            int[] arrCutTheSticks = new int[] { 1, 2, 3, 4, 3, 3, 2, 1 };
+            foreach (var CTS in cutTheSticks(arrCutTheSticks))
+                Console.WriteLine(CTS);
+            #endregion
+
+            //44 repeatedString
+            #region
+            Console.WriteLine("Repeated String");
+            string sRepeatedString = "aba";
+            long nRepeatedString = 10;
+            Console.WriteLine(repeatedString(sRepeatedString, nRepeatedString));
+            #endregion
+
+            //45 jumpingOnClouds
+            #region
+            Console.WriteLine("Jumping on Clouds");
+            int[] cJumpingOnCloudsTwo = new int[] {0, 0, 1, 0, 0, 1, 0 };
+            Console.WriteLine(jumpingOnClouds(cJumpingOnCloudsTwo));
+            #endregion
+
 
         }
 
@@ -1112,6 +1135,60 @@ namespace ConsoleApp3
 
             }
             return fine;
+        }
+
+        static int[] cutTheSticks(int[] arr)
+        {
+
+            List<int> cuts = new List<int>();
+            arr = arr.OrderBy(x => x).ToArray();
+            int min = arr[0];
+            cuts.Add(arr.Length);
+            for (int i = 0; i < arr.Length; i++)
+            {
+                if (arr[i] > min)
+                {
+                    min = arr[i];
+                    cuts.Add(arr.Length - i);
+                }
+            }
+            return cuts.ToArray();
+        }
+
+        static long repeatedString(string s, long n)
+        {
+            long whole = n / s.Length;
+            int remainder = (int)(n % s.Length);
+            int aCount = 0;
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (s[i].Equals('a'))
+                    aCount++;
+            }
+            long total = aCount * whole;
+            if (remainder == 0)
+                return total;
+            else
+            {
+                string part = s.Substring(0, remainder);
+                for (int i = 0; i < part.Length; i++)
+                {
+                    if (part[i].Equals('a'))
+                        total++;
+                }
+            }
+            return total;
+        }
+
+        static int jumpingOnClouds(int[] c)
+        {
+            int count = 0;
+            for (int i = 0; i < c.Length - 1; i++)
+            {
+                if (c[i] == 0) i++;
+                count++;
+            }
+            return count;
         }
     }
 }
