@@ -408,6 +408,33 @@ namespace ConsoleApp3
             Console.WriteLine(jumpingOnClouds(cJumpingOnCloudsTwo));
             #endregion
 
+            //46 equalizeArray
+            #region
+            Console.WriteLine("Equalize Array");
+            int[] arrEqualizeArray = new int[] { 3, 3, 2, 1, 3 };
+            Console.WriteLine(equalizeArray(arrEqualizeArray));
+            #endregion
+
+            //47 taumBday
+            #region
+            Console.WriteLine("Taum Bday");
+            long bTaumBday = 10;
+            long wTaumBday = 10;
+            long bcTaumBday = 1;
+            long wcTaumBday = 1;
+            long zTaumBday = 1;
+            Console.WriteLine(taumBday(bTaumBday, wTaumBday, bcTaumBday, wcTaumBday, zTaumBday));
+            #endregion
+
+            //48 encryption
+            #region
+            Console.WriteLine("Encryption");
+            string sEncryption = "haveaniceday";
+            Console.WriteLine(encryption(sEncryption));
+            #endregion
+
+
+
 
         }
 
@@ -1189,6 +1216,67 @@ namespace ConsoleApp3
                 count++;
             }
             return count;
+        }
+
+        static int equalizeArray(int[] arr)
+        {
+            int[] frequency = new int[500];
+            int counter = 0;
+            for (int i = 0; i < arr.Length; i++)
+            {
+                int index = arr[i];
+                frequency[index]++;
+            }
+            var max = frequency.Max();
+            int maxIndex = Array.IndexOf(frequency, max);
+            for (int i = 0; i < arr.Length; i++)
+            {
+                if (arr[i] != maxIndex)
+                    counter++;
+            }
+
+            return counter;
+        }
+
+        public static long taumBday(long b, long w, long bc, long wc, long z)
+        {
+            long result = 0;
+            if (bc > wc + z)
+            {
+                result = w * wc + b * (wc + z);
+            }
+            else if (wc > bc + z)
+            {
+                result = b * bc + w * (bc + z);
+            }
+            else
+            {
+                result = b * bc + w * wc;
+            }
+            return result;
+        }
+
+        static string encryption(string s)
+        {
+            string sWithoutSpace = s.Replace(" ", String.Empty);
+            double stringLength = sWithoutSpace.Length;
+            int upperBoundary = (int)Math.Ceiling(Math.Sqrt(stringLength));
+            int lowerBoundary = (int)Math.Floor(Math.Sqrt(stringLength));
+            if (upperBoundary * lowerBoundary < stringLength)
+            {
+                lowerBoundary += 1;
+            }
+            string result = "";
+
+            for (int i = 0; i < upperBoundary; i++)
+            {
+                for (int j = i; j < sWithoutSpace.Length; j += upperBoundary)
+                {
+                    result += sWithoutSpace[j];
+                }
+                result += " ";
+            }
+            return result;
         }
     }
 }
