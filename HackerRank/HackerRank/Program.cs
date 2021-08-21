@@ -433,8 +433,29 @@ namespace ConsoleApp3
             Console.WriteLine(encryption(sEncryption));
             #endregion
 
+            //49 kaprekarNumbers 
+            #region
+            Console.WriteLine("Kaprekar Numbers");
+            int pKaprekarNumbers = 1;
+            int qKaprekarNumbers = 100;
+            kaprekarNumbers(pKaprekarNumbers, qKaprekarNumbers);
+            Console.WriteLine();
+            #endregion
 
+            //50 beautifulTriplets
+            #region
+            Console.WriteLine("Beautiful Triplets");
+            int dBeautifulTriplets = 3;
+            int[] arrBeatufilTriplets = new int[] { 1, 2, 4, 5, 7, 8, 10 };
+            Console.WriteLine(beautifulTriplets(dBeautifulTriplets, arrBeatufilTriplets));
+            #endregion
 
+            //51 minimumDistances 
+            #region
+            Console.WriteLine("Minimum distances");
+            int[] aMinimumDistances = new int[] { 7, 1, 3, 4, 1, 7 };
+            Console.WriteLine(minimumDistances(aMinimumDistances));
+            #endregion
 
         }
 
@@ -1041,6 +1062,7 @@ namespace ConsoleApp3
             return counter >= k ? "NO" : "YES";
         }
 
+        //beautifulDays
         #region
         static int beautifulDays(int i, int j, int k)
         {
@@ -1277,6 +1299,84 @@ namespace ConsoleApp3
                 result += " ";
             }
             return result;
+        }
+
+        // kaprekarNumbers
+        #region
+        static void kaprekarNumbers(int p, int q)
+        {
+            bool kaprekar = false;
+            for (int i = p; i <= q; i++)
+            {
+                if (iskaprekarNumber(i))
+                {
+                    kaprekar = true;
+                    Console.Write(i + " ");
+                }
+
+            }
+            if (!kaprekar)
+                Console.WriteLine("INVALID RANGE");
+        }
+
+        static bool iskaprekarNumber(int n)
+        {
+            long squared = (long)n * n;
+            string str = squared.ToString();
+            string left = str.Substring(0, str.Length / 2);
+            string right = str.Substring(str.Length / 2);
+            int numL = (left == "" || left == null) ? 0 : int.Parse(left);
+            int numR = (right == "" || right == null) ? 0 : int.Parse(right);
+            if (numL + numR == n)
+                return true;
+            else
+                return false;
+        }
+        #endregion
+
+        static int beautifulTriplets(int d, int[] arr)
+        {
+            int counter = 0;
+
+            for (int i = 0; i < arr.Length; i++)
+            {
+                for (int j = i + 1; j < arr.Length; j++)
+                {
+                    if (arr[j] - arr[i] == d)
+                    {
+                        for (int k = j + 1; k < arr.Length; k++)
+                        {
+                            if (arr[k] - arr[j] == d)
+                                counter++;
+                        }
+                    }
+                }
+            }
+            return counter;
+        }
+
+        static int minimumDistances(int[] a)
+        {
+            int minDistance = int.MaxValue;
+            bool equalElement = false;
+            for (int i = 0; i < a.Length; i++)
+            {
+                for (int j = i + 1; j < a.Length; j++)
+                {
+                    if (a[i] == a[j])
+                    {
+                        equalElement = true;
+                        if (j - i < minDistance)
+                        {
+                            minDistance = j - i;
+                        }
+                    }
+                }
+            }
+            if (equalElement)
+                return minDistance;
+            else
+                return -1;
         }
     }
 }
