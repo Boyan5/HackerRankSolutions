@@ -163,7 +163,7 @@ namespace ConsoleApp3
             Console.WriteLine("Breaking Records");
             int[] scoresBreakingRecords = new int[] { 10, 5, 20, 20, 4, 5, 2, 25, 1 };
 
-            foreach(var resultBreakingRecords in breakingRecords(scoresBreakingRecords))
+            foreach (var resultBreakingRecords in breakingRecords(scoresBreakingRecords))
                 Console.Write(resultBreakingRecords + " ");
             #endregion
 
@@ -235,7 +235,7 @@ namespace ConsoleApp3
             Console.WriteLine("Page Count");
             int nPageCount = 6;
             int pPageCount = 2;
-            Console.WriteLine(pageCount(nPageCount,pPageCount));
+            Console.WriteLine(pageCount(nPageCount, pPageCount));
             #endregion
 
             //23 countingValleys 
@@ -267,7 +267,7 @@ namespace ConsoleApp3
             //26 formingMagicSquare
             #region
             Console.WriteLine("Forming Magic Square");
-            int[][] sFormingMagicSquare = new int[][] { new int[]{ 4, 9, 2 }, new int[] { 3, 5, 7 }, new int[] { 8, 1, 5 } };
+            int[][] sFormingMagicSquare = new int[][] { new int[] { 4, 9, 2 }, new int[] { 3, 5, 7 }, new int[] { 8, 1, 5 } };
             Console.WriteLine(formingMagicSquare(sFormingMagicSquare));
             #endregion
 
@@ -295,7 +295,7 @@ namespace ConsoleApp3
             //29 designerPDFViewer
             #region
             Console.WriteLine("Designer PDF Viewer");
-            int[] hDesignerPDFViewer = new int[] { 1, 3, 1, 3, 1, 4, 1, 3, 2, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,};
+            int[] hDesignerPDFViewer = new int[] { 1, 3, 1, 3, 1, 4, 1, 3, 2, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, };
             string wordDesignerPDFViewer = "abc";
             Console.WriteLine(designerPdfViewer(hDesignerPDFViewer, wordDesignerPDFViewer));
             #endregion
@@ -404,7 +404,7 @@ namespace ConsoleApp3
             //45 jumpingOnClouds
             #region
             Console.WriteLine("Jumping on Clouds");
-            int[] cJumpingOnCloudsTwo = new int[] {0, 0, 1, 0, 0, 1, 0 };
+            int[] cJumpingOnCloudsTwo = new int[] { 0, 0, 1, 0, 0, 1, 0 };
             Console.WriteLine(jumpingOnClouds(cJumpingOnCloudsTwo));
             #endregion
 
@@ -457,6 +457,41 @@ namespace ConsoleApp3
             Console.WriteLine(minimumDistances(aMinimumDistances));
             #endregion
 
+            //52  howManyGames
+            #region
+            Console.WriteLine("How Many Games");
+            int pHowManyGames = 20;
+            int dHowManyGames = 3;
+            int mHowManyGames = 6;
+            int sHowManyGames = 80;
+            Console.WriteLine(howManyGames(pHowManyGames, dHowManyGames, mHowManyGames, sHowManyGames));
+            #endregion
+
+            //53 chocalateFeast
+            #region
+            Console.WriteLine("Chocolate Feast");
+            int nChocolateFeast = 10;
+            int cChocolateFeast = 2;
+            int mChocolateFeast = 5;
+            Console.WriteLine(chocolateFeast(nChocolateFeast, cChocolateFeast, mChocolateFeast));
+            #endregion
+
+            //54 serviceLane
+            #region
+            Console.WriteLine("Service Lane");
+            int nServiceLane = 5;
+            int[] widthServiceLane = new int[] { 2, 3, 1, 2, 3, 2, 3, 3 };
+            int[][] casesServiceLane = new int[][]
+            {
+                new int[] { 0, 3 },
+                new int[] { 4, 6 },
+                new int[] { 6, 7 },
+                new int[] { 3, 5 },
+                new int[] { 0, 7 }
+            };
+            foreach (var SL in serviceLane(nServiceLane, widthServiceLane, casesServiceLane))
+                Console.WriteLine(SL);
+            #endregion
         }
 
         static int solveMeFirst(int a, int b)
@@ -1377,6 +1412,64 @@ namespace ConsoleApp3
                 return minDistance;
             else
                 return -1;
+        }
+
+        static int howManyGames(int p, int d, int m, int s)
+        {
+            int counter = 0;
+            int sum = 0;
+            int previousPrice = 0;
+
+            while (s >= sum + m && !(s < p))
+            {
+                if (previousPrice + p > s)
+                {
+                    break;
+                }
+                counter++;
+                sum += p;
+                previousPrice = p;
+                if (p - d < m)
+                    p = m;
+                else
+                    p -= d;
+            }
+            return counter;
+        }
+
+        static int chocolateFeast(int n, int c, int m)
+        {
+            int choco = n / c;
+            int wrappers = 0;
+            int counter = 0;
+
+            while (choco > 0)
+            {
+                counter += choco;
+                wrappers += choco;
+                choco = wrappers / m;
+                wrappers %= m;
+            }
+            return counter;
+        }
+
+        static int[] serviceLane(int n, int[] width, int[][] cases)
+        {
+            List<int> mins = new List<int>();
+
+            for (int i = 0; i < cases.GetLength(0); i++)
+            {
+                int min = int.MaxValue;
+                for (int j = cases[i][0]; j <= cases[i][1]; j++)
+                {
+                    if (width[j] < min)
+                    {
+                        min = width[j];
+                    }
+                }
+                mins.Add(min);
+            }
+            return mins.ToArray();
         }
     }
 }
