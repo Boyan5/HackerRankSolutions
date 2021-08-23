@@ -492,6 +492,35 @@ namespace ConsoleApp3
             foreach (var SL in serviceLane(nServiceLane, widthServiceLane, casesServiceLane))
                 Console.WriteLine(SL);
             #endregion
+
+            //55 workBook
+            #region
+            Console.WriteLine("Workbook");
+            int nWorkbook = 5;
+            int kWorkbook = 3;
+            int[] arrWorkbook = new int[] { 4, 2, 6, 1, 10 };
+            Console.WriteLine(workbook(nWorkbook, kWorkbook, arrWorkbook));
+            #endregion
+
+            //56 flatlandSpaceStations 
+            #region
+            Console.WriteLine("FlatlandSpaceStations");
+            int nFlatlandSpaceStations = 5;
+            int[] cFlatlandSpaceStations = new int[] { 0, 4 };
+            Console.WriteLine(flatlandSpaceStations(nFlatlandSpaceStations, cFlatlandSpaceStations));
+            #endregion
+
+            //57 fairRotations 
+            #region
+            Console.WriteLine("Fair Rations");
+            List<int> BFairRations = new List<int>();
+            BFairRations.Add(2);
+            BFairRations.Add(3);
+            BFairRations.Add(4);
+            BFairRations.Add(5);
+            BFairRations.Add(6);
+            Console.WriteLine(fairRations(BFairRations));
+            #endregion
         }
 
         static int solveMeFirst(int a, int b)
@@ -1470,6 +1499,68 @@ namespace ConsoleApp3
                 mins.Add(min);
             }
             return mins.ToArray();
+        }
+
+        static int workbook(int n, int k, int[] arr)
+        {
+            int page = 1;
+            int counter = 0;
+            int initialK = k;
+            for (int i = 1; i <= arr.Length; i++)
+            {
+                for (int j = 1; j <= arr[i - 1]; j++)
+                {
+                    if (j > k)
+                    {
+                        page++;
+                        k += initialK;
+                    }
+                    if (page == j)
+                        counter++;
+                }
+                page++;
+                k = initialK;
+            }
+            return counter;
+        }
+
+        static int flatlandSpaceStations(int n, int[] c)
+        {
+            Array.Sort(c);
+            int maxDistance = c[0];
+            for (int i = 1; i < c.Length; i++)
+            {
+                int distance = (c[i] - c[i - 1]) / 2;
+                if (maxDistance < distance) maxDistance = distance;
+            }
+            int lastGap = (n - 1) - c[c.Length - 1];
+            return (lastGap < maxDistance) ? maxDistance : lastGap;
+        }
+
+        public static string fairRations(List<int> B)
+        {
+            int counter = 0;
+            int sum = 0;
+            for (int i = 0; i < B.Count; i++)
+            {
+                sum += B[i];
+            }
+
+            if (sum % 2 != 0)
+                return "NO";
+            else
+            {
+                for (int i = 0; i < B.Count - 1; i++)
+                {
+                    if (B[i] % 2 != 0)
+                    {
+                        B[i]++;
+                        B[i + 1]++;
+                        counter += 2;
+                    }
+                }
+            }
+            return counter.ToString();
         }
     }
 }
