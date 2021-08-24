@@ -510,7 +510,7 @@ namespace ConsoleApp3
             Console.WriteLine(flatlandSpaceStations(nFlatlandSpaceStations, cFlatlandSpaceStations));
             #endregion
 
-            //57 fairRotations 
+            //57 fairRations 
             #region
             Console.WriteLine("Fair Rations");
             List<int> BFairRations = new List<int>();
@@ -520,6 +520,32 @@ namespace ConsoleApp3
             BFairRations.Add(5);
             BFairRations.Add(6);
             Console.WriteLine(fairRations(BFairRations));
+            #endregion
+
+            //58 cavityMap
+            #region
+            Console.WriteLine("Cavity Map");
+            List<string> gridCavityMap = new List<string>();
+            gridCavityMap.Add("1112");
+            gridCavityMap.Add("1912");
+            gridCavityMap.Add("1892");
+            gridCavityMap.Add("1234");
+            foreach (var Cavitymap in cavityMap(gridCavityMap))
+                Console.WriteLine(Cavitymap);
+            #endregion
+
+            //59 strangeCounter
+            #region
+            Console.WriteLine("Strange Counter");
+            long tStrangeCounter = 4;
+            Console.WriteLine(strangeCounter(tStrangeCounter));
+            #endregion
+
+            //60 superReducedString
+            #region
+            Console.WriteLine("Super Reduced String");
+            string sSuperReducedString = "aaabccddd";
+            Console.WriteLine(superReducedString(sSuperReducedString));
             #endregion
         }
 
@@ -1561,6 +1587,71 @@ namespace ConsoleApp3
                 }
             }
             return counter.ToString();
+        }
+
+        public static List<string> cavityMap(List<string> grid)
+        {
+            char[,] chars = new char[grid.Count, grid[0].Length];
+            List<string> result = new List<string>();
+            int[,] elements = new int[grid.Count, grid[0].Length];
+
+            for (int i = 0; i < elements.GetLength(0); i++)
+            {
+                for (int j = 0; j < elements.GetLength(1); j++)
+                {
+                    chars[i, j] = grid[i][j];
+                    elements[i, j] = int.Parse(grid[i][j].ToString());
+                }
+            }
+
+            for (int i = 1; i < elements.GetLength(0) - 1; i++)
+            {
+                for (int j = 1; j < elements.GetLength(1) - 1; j++)
+                {
+                    var current = elements[i, j];
+                    if (current > elements[i - 1, j] && current > elements[i, j - 1] && current > elements[i, j + 1] && current > elements[i + 1, j])
+                        chars[i, j] = 'X';
+                }
+            }
+
+            for (int i = 0; i < chars.GetLength(0); i++)
+            {
+                string row = "";
+                for (int j = 0; j < chars.GetLength(1); j++)
+                {
+                    row += chars[i, j];
+                }
+                result.Add(row);
+            }
+            return result;
+        }
+
+        static long strangeCounter(long t)
+        {
+            long rem = 3;
+            while (t > rem)
+            {
+                t = t - rem;
+                rem *= 2;
+            }
+            return rem - t + 1;
+        }
+
+        static string superReducedString(string s)
+        {
+            for (int i = 1; i < s.Length; i++)
+            {
+                if (s[i].Equals(s[i - 1]))
+                {
+                    s = s.Substring(0, i - 1) + s.Substring(i + 1);
+                    i = 0;
+                }
+            }
+
+            if (s.Length == 0)
+                return "Empty String";
+            else
+                return s;
         }
     }
 }
