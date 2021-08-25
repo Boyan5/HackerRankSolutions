@@ -547,6 +547,29 @@ namespace ConsoleApp3
             string sSuperReducedString = "aaabccddd";
             Console.WriteLine(superReducedString(sSuperReducedString));
             #endregion
+
+            //61 introTutorial
+            #region
+            Console.WriteLine("Intro Tutorial");
+            int VIntroTutorial = 4;
+            int[] arrIntroTutorial = new int[] { 1, 4, 5, 7, 9, 12 };
+            Console.WriteLine(introTutorial(VIntroTutorial, arrIntroTutorial));
+            #endregion
+
+            //62 camelCase
+            #region
+            Console.WriteLine("Camel Case");
+            string sCamelCase = "saveChangesInTheEditor";
+            Console.WriteLine(camelcase(sCamelCase));
+            #endregion
+
+            //63 minimumNumber
+            #region
+            Console.WriteLine("Minimum Number");
+            int nMinimumNumber = 3;
+            string passwordMinimumNumber = "Ab1";
+            Console.WriteLine(minimumNumber(nMinimumNumber, passwordMinimumNumber));
+            #endregion
         }
 
         static int solveMeFirst(int a, int b)
@@ -1652,6 +1675,95 @@ namespace ConsoleApp3
                 return "Empty String";
             else
                 return s;
+        }
+
+        static int introTutorial(int V, int[] arr)
+        {
+            for (int i = 0; i < arr.Length; i++)
+            {
+                if (arr[i] == V)
+                    return i;
+            }
+            return 2;
+        }
+
+        static int camelcase(string s)
+        {
+            string lower = s.ToLower();
+            int counter = 1;
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (s[i] != lower[i])
+                    counter++;
+            }
+            return counter;
+        }
+
+        static int minimumNumber(int n, string password)
+        {
+            // Return the minimum number of characters to make the password strong
+            string numbers = "0123456789";
+            bool containsDigit = false;
+            string lower_case = "abcdefghijklmnopqrstuvwxyz";
+            bool containsLower = false;
+            string upper_case = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            bool containsUpper = false;
+            string special_characters = "!@#$%^&*()-+";
+            bool containsSpecial = false;
+
+            int counter = 0;
+
+            for (int i = 0; i < numbers.Length; i++)
+            {
+                if (password.Contains(numbers[i]))
+                {
+                    containsDigit = true;
+                    break;
+                }
+            }
+
+            for (int i = 0; i < lower_case.Length; i++)
+            {
+                if (password.Contains(lower_case[i]))
+                {
+                    containsLower = true;
+                    break;
+                }
+            }
+
+            for (int i = 0; i < upper_case.Length; i++)
+            {
+                if (password.Contains(upper_case[i]))
+                {
+                    containsUpper = true;
+                    break;
+                }
+            }
+
+            for (int i = 0; i < special_characters.Length; i++)
+            {
+                if (password.Contains(special_characters[i]))
+                {
+                    containsSpecial = true;
+                    break;
+                }
+            }
+
+            if (!containsDigit)
+                counter++;
+            if (!containsLower)
+                counter++;
+            if (!containsUpper)
+                counter++;
+            if (!containsSpecial)
+                counter++;
+
+            if (password.Length < 6 && 6 - password.Length > counter)
+            {
+                return 6 - password.Length;
+            }
+            else
+                return counter;
         }
     }
 }
