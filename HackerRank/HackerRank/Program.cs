@@ -570,6 +570,28 @@ namespace ConsoleApp3
             string passwordMinimumNumber = "Ab1";
             Console.WriteLine(minimumNumber(nMinimumNumber, passwordMinimumNumber));
             #endregion
+
+            //64 insertionSort
+            #region
+            Console.WriteLine("Insertion Sort");
+            int[] AInsertionSort = new int[] { 4, 1, 3, 5, 6, 2 };
+            insertionSort(AInsertionSort);
+            #endregion
+
+            //65 caesarCipher
+            #region
+            Console.WriteLine("Caesar Cipher");
+            string sCaesarCipher = "middle-Outz";
+            int kCaesarCipher = 2;
+            Console.WriteLine(caesarCipher(sCaesarCipher, kCaesarCipher));
+            #endregion
+
+            //66 marsExploration
+            #region
+            Console.WriteLine("Mars Exploration");
+            string sMarsExploration = "SOSSPSSQSSOR";
+            Console.WriteLine(marsExploration(sMarsExploration));
+            #endregion
         }
 
         static int solveMeFirst(int a, int b)
@@ -1764,6 +1786,78 @@ namespace ConsoleApp3
             }
             else
                 return counter;
+        }
+
+        public static void insertionSort(int[] A)
+        {
+            var j = 0;
+            for (var i = 1; i < A.Length; i++)
+            {
+                var value = A[i];
+                j = i - 1;
+                while (j >= 0 && value < A[j])
+                {
+                    A[j + 1] = A[j];
+                    j = j - 1;
+                }
+                A[j + 1] = value;
+            }
+            Console.WriteLine(string.Join(" ", A));
+        }
+
+        static string caesarCipher(string s, int k)
+        {
+            string alphabet = "abcdefghijklmnopqrstuvwxyz";
+            string messageToLower = s.ToLower();
+            string encrypted = "";
+
+            string[] shifted = new string[alphabet.Length];
+
+            for (int i = 0; i < alphabet.Length; i++)
+            {
+                shifted[i] = alphabet[(i + k) % alphabet.Length].ToString();
+            }
+
+            for (int i = 0; i < s.Length; i++)
+            {
+                for (int j = 0; j < alphabet.Length; j++)
+                {
+                    if (alphabet[j].Equals(messageToLower[i]))
+                    {
+                        if (char.IsUpper(s[i]))
+                            encrypted += shifted[j].ToUpper();
+                        else
+                            encrypted += shifted[j];
+                        break;
+                    }
+
+                    if (!(alphabet.Contains(messageToLower[i])))
+                    {
+                        encrypted += s[i];
+                        break;
+                    }
+
+                }
+            }
+            return encrypted;
+        }
+
+        static int marsExploration(string s)
+        {
+            int counter = 0;
+
+            for (int i = 0; i < s.Length; i += 3)
+            {
+                string current = s.Substring(i, 3);
+                if (current[0] != 'S')
+                    counter++;
+                if (current[1] != 'O')
+                    counter++;
+                if (current[2] != 'S')
+                    counter++;
+            }
+
+            return counter;
         }
     }
 }
