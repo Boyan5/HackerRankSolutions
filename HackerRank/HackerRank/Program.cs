@@ -592,6 +592,29 @@ namespace ConsoleApp3
             string sMarsExploration = "SOSSPSSQSSOR";
             Console.WriteLine(marsExploration(sMarsExploration));
             #endregion
+
+            //67 hackerrankInString
+            #region
+            Console.WriteLine("HackerRank in String");
+            string sHackerRankInString = "hereiamstackerrank";
+            Console.WriteLine(hackerrankInString(sHackerRankInString));
+            #endregion
+
+            //68 quickSort
+            #region
+            Console.WriteLine("Quick Sort");
+            int[] arrQuickSort = new int[] { 4, 5, 3, 7, 2 };
+            foreach (var aQuickSort in quickSort(arrQuickSort))
+                Console.Write(aQuickSort + " ");
+            Console.WriteLine();
+            #endregion
+
+            //69 pangrams
+            #region
+            Console.WriteLine("Pangrams");
+            string sPangrams = "We promptly judged antique ivory buckles for the next prize";
+            Console.WriteLine(pangrams(sPangrams));
+            #endregion
         }
 
         static int solveMeFirst(int a, int b)
@@ -1858,6 +1881,117 @@ namespace ConsoleApp3
             }
 
             return counter;
+        }
+
+        static string hackerrankInString(string s)
+        {
+            string hackerrank = "hackerrank";
+            int j = 0;
+            for (int i = 0; i < hackerrank.Length; i++)
+            {
+                char current = hackerrank[i];
+                while (s[j] != current && j < s.Length)
+                {
+                    j++;
+                    if (j == s.Length)
+                    {
+                        return "NO";
+                    }
+                }
+                j++;
+                if (j == s.Length && i == hackerrank.Length - 1)
+                {
+                    return "YES";
+                }
+                if (j == s.Length)
+                {
+                    return "NO";
+                }
+            }
+            return "YES";
+        }
+
+        static int[] quickSort(int[] arr)
+        {
+            int p = arr[0];
+            int leftLength = 0;
+            int rightLength = 0;
+            int equalLength = 0;
+            for (int i = 0; i < arr.Length; i++)
+            {
+                if (arr[i] < p)
+                    leftLength++;
+                else if (arr[i] > p)
+                    rightLength++;
+                else
+                    equalLength++;
+            }
+            int[] left = new int[leftLength];
+            int[] right = new int[rightLength];
+            int[] equal = new int[equalLength];
+
+            int iLeft = 0;
+            int iRight = 0;
+            int iEqual = 0;
+
+            for (int i = 0; i < arr.Length; i++)
+            {
+                if (arr[i] < p)
+                {
+                    left[iLeft] = arr[i];
+                    iLeft++;
+                }
+                else if (arr[i] > p)
+                {
+                    right[iRight] = arr[i];
+                    iRight++;
+                }
+                else
+                {
+                    equal[iEqual] = arr[i];
+                    iEqual++;
+                }
+            }
+
+            int[] result = new int[leftLength + rightLength + equalLength];
+            int j = 0;
+            for (int i = 0; i < left.Length; i++)
+            {
+                result[j] = left[i];
+                j++;
+            }
+
+            for (int i = 0; i < equal.Length; i++)
+            {
+                result[j] = equal[i];
+                j++;
+            }
+
+            for (int i = 0; i < right.Length; i++)
+            {
+                result[j] = right[i];
+                j++;
+            }
+
+            return result;
+        }
+
+        static string pangrams(string s)
+        {
+            string alphabet = "abcdefghijklmnopqrstuvwxyz";
+            bool isPangram = true;
+            string sToLower = s.ToLower();
+
+            for (int i = 0; i < alphabet.Length; i++)
+            {
+                if (!(sToLower.Contains(alphabet[i])))
+                    isPangram = false;
+            }
+
+            if (isPangram)
+                return "pangram";
+            else
+                return "not pangram";
         }
     }
 }
