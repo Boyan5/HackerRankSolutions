@@ -615,6 +615,29 @@ namespace ConsoleApp3
             string sPangrams = "We promptly judged antique ivory buckles for the next prize";
             Console.WriteLine(pangrams(sPangrams));
             #endregion
+
+            //70 separateNumbers
+            #region
+            Console.WriteLine("Separate Numbers");
+            string sSeparateNumbers = "99100";
+            separateNumbers(sSeparateNumbers);
+            #endregion
+
+            //71 funnyString
+            #region
+            Console.WriteLine("Funny String");
+            string sFunnyString = "acxz";
+            Console.WriteLine(funnyString(sFunnyString));
+            #endregion
+
+            //72 countingSort
+            #region
+            Console.WriteLine("Counting Sort");
+            int[] arrCountingSort = new int[] { 63, 25, 73, 1, 98, 73, 56, 84, 86, 57, 16, 83, 8, 25, 81, 56, 9, 53, 98, 67, 99, 12, 83, 89, 80, 91, 39, 86, 76, 85, 74, 39, 25, 90, 59, 10, 94, 32, 44, 3, 89, 30, 27, 79, 46, 96, 27, 32, 18, 21, 92, 69, 81, 40, 40, 34, 68, 78, 24, 87, 42, 69, 23, 41, 78, 22, 6, 90, 99, 89, 50, 30, 20, 1, 43, 3, 70, 95, 33, 46, 44, 9, 69, 48, 33, 60, 65, 16, 82, 67, 61, 32, 21, 79, 75, 75, 13, 87, 70, 33 };
+            foreach (var aCountingSort in countingSort(arrCountingSort))
+                Console.Write(aCountingSort + " ");
+            Console.WriteLine();
+            #endregion
         }
 
         static int solveMeFirst(int a, int b)
@@ -1992,6 +2015,68 @@ namespace ConsoleApp3
                 return "pangram";
             else
                 return "not pangram";
+        }
+
+        public static void separateNumbers(string s)
+        {
+            string subString = "";
+            bool isValid = false;
+            for (int i = 1; i <= s.Length / 2; i++)
+            {
+                subString = s.Substring(0, i);
+                long num = long.Parse(subString);
+                string validString = subString;
+                while (validString.Length < s.Length)
+                {
+                    validString += ++num;
+                }
+                if (s.Equals(validString))
+                {
+                    isValid = true;
+                    break;
+                }
+
+            }
+            Console.WriteLine((isValid ? "YES " + subString : "NO"));
+        }
+
+        static string funnyString(string s)
+        {
+            string reversed = "";
+            bool isFunny = true;
+            List<int> sDifference = new List<int>();
+            List<int> reverseDifference = new List<int>();
+            for (int i = s.Length - 1; i >= 0; i--)
+                reversed += s[i];
+
+            for (int i = 0; i < s.Length - 1; i++)
+            {
+                sDifference.Add(Math.Abs((int)s[i] - (int)s[i + 1]));
+            }
+
+            for (int i = 0; i < reversed.Length - 1; i++)
+            {
+                reverseDifference.Add(Math.Abs((int)reversed[i] - (int)reversed[i + 1]));
+            }
+
+            for (int i = 0; i < sDifference.Count; i++)
+            {
+                if (sDifference[i] != reverseDifference[i])
+                    isFunny = false;
+            }
+
+            if (isFunny)
+                return "Funny";
+            else
+                return "Not Funny";
+        }
+
+        static int[] countingSort(int[] arr)
+        {
+            int[] zeros = new int[100];
+            for (int i = 0; i < arr.Length; i++)
+                zeros[arr[i]]++;
+            return zeros;
         }
     }
 }
