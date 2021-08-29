@@ -638,6 +638,30 @@ namespace ConsoleApp3
                 Console.Write(aCountingSort + " ");
             Console.WriteLine();
             #endregion
+
+            //73 countingSort2
+            #region
+            Console.WriteLine("Counting Sort 2");
+            int[] arrCS2 = new int[] { 63, 25, 73, 1, 98, 73, 56, 84, 86, 57, 16, 83, 8, 25, 81, 56, 9, 53, 98, 67, 99, 12, 83, 89, 80, 91, 39, 86, 76, 85, 74, 39, 25, 90, 59, 10, 94, 32, 44, 3, 89, 30, 27, 79, 46, 96, 27, 32, 18, 21, 92, 69, 81, 40, 40, 34, 68, 78, 24, 87, 42, 69, 23, 41, 78, 22, 6, 90, 99, 89, 50, 30, 20, 1, 43, 3, 70, 95, 33, 46, 44, 9, 69, 48, 33, 60, 65, 16, 82, 67, 61, 32, 21, 79, 75, 75, 13, 87, 70, 33 };
+            List<int> arrCountingSort2 = arrCS2.ToList();
+            foreach (var aCountingSort2 in countingSort2(arrCountingSort2))
+                Console.Write(aCountingSort2 + " ");
+            Console.WriteLine();
+            #endregion
+
+            //74 gemStones
+            #region
+            Console.WriteLine("Gemstones");
+            string[] arrGemStones = new string[] { "abcdde", "baccd", "eeabg" };
+            Console.WriteLine(gemstones(arrGemStones));
+            #endregion
+
+            //75 alternatingCharacters
+            #region
+            Console.WriteLine("Alternating Characters");
+            string sAlternatingCharacters = "AAABBB";
+            Console.WriteLine(alternatingCharacters(sAlternatingCharacters));
+            #endregion
         }
 
         static int solveMeFirst(int a, int b)
@@ -2077,6 +2101,74 @@ namespace ConsoleApp3
             for (int i = 0; i < arr.Length; i++)
                 zeros[arr[i]]++;
             return zeros;
+        }
+
+        public static List<int> countingSort2(List<int> arr)
+        {
+            List<int> values = new List<int>();
+            int max = arr.Max();
+
+            int[] frequency = new int[max + 1];
+
+            for (int i = 0; i < frequency.Length; i++)
+            {
+                frequency[i] = 0;
+            }
+
+            for (int i = 0; i < arr.Count; i++)
+            {
+                frequency[arr[i]]++;
+            }
+
+            for (int i = 0; i < frequency.Length; i++)
+            {
+                if (frequency[i] == 0)
+                    continue;
+                else
+                {
+                    for (int j = 0; j < frequency[i]; j++)
+                    {
+                        values.Add(i);
+                    }
+                }
+            }
+
+            return values;
+        }
+
+        static int gemstones(string[] arr)
+        {
+            int counter = 1;
+            int globalCounter = 0;
+            string first = arr[0];
+            var firstDistinct = first.Distinct();
+            int j = 1;
+            for (int i = 0; i < firstDistinct.Count(); i++)
+            {
+                while (j < arr.Length)
+                {
+                    if (arr[j].Contains(firstDistinct.ElementAt(i)))
+                        counter++;
+                    j++;
+                }
+                if (counter == arr.Length)
+                    globalCounter++;
+                j = 1;
+                counter = 1;
+            }
+
+            return globalCounter;
+        }
+
+        static int alternatingCharacters(string s)
+        {
+            int counter = 0;
+            for (int i = 0; i < s.Length - 1; i++)
+            {
+                if (s[i].Equals(s[i + 1]))
+                    counter++;
+            }
+            return counter;
         }
     }
 }
