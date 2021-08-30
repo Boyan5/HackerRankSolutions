@@ -662,6 +662,29 @@ namespace ConsoleApp3
             string sAlternatingCharacters = "AAABBB";
             Console.WriteLine(alternatingCharacters(sAlternatingCharacters));
             #endregion
+
+            //76 beautifulBinaryString
+            #region
+            Console.WriteLine("Beautiful Binary String");
+            string bBeautifulBinaryString = "0101010";
+            Console.WriteLine(beautifulBinaryString(bBeautifulBinaryString));
+            #endregion
+
+            //77 closestNumbers
+            #region
+            Console.WriteLine("Closest Numbers");
+            int[] arrClosestNumbers = new int[] { -20, -3916237, -357920, -3620601, 7374819, -7330761, 30, 6246457, -6461594, 266854 };
+            foreach (var aClosestNumbers in closestNumbers(arrClosestNumbers))
+                Console.Write(aClosestNumbers + " ");
+            Console.WriteLine();
+            #endregion
+
+            //78 theLoveLetterMystery 
+            #region
+            Console.WriteLine("The Love Letter Mystery");
+            string sTheLoveLetterMystery = "cba";
+            Console.WriteLine(theLoveLetterMystery(sTheLoveLetterMystery));
+            #endregion
         }
 
         static int solveMeFirst(int a, int b)
@@ -2167,6 +2190,57 @@ namespace ConsoleApp3
             {
                 if (s[i].Equals(s[i + 1]))
                     counter++;
+            }
+            return counter;
+        }
+
+        static int beautifulBinaryString(string b)
+        {
+            int counter = 0;
+            for (int i = 2; i < b.Length;)
+            {
+                if (b[i] == '0' && b[i - 2] == '0' && b[i - 1] == '1')
+                {
+                    counter++;
+                    i += 3;
+                }
+                else
+                    i++;
+            }
+            return counter;
+        }
+
+        static int[] closestNumbers(int[] arr)
+        {
+            Array.Sort(arr);
+            int min = int.MaxValue;
+            List<int> mins = new List<int>();
+
+            for (int i = 0; i < arr.Length - 1; i++)
+            {
+                if (Math.Abs(arr[i] - arr[i + 1]) <= min)
+                {
+                    min = Math.Abs(arr[i] - arr[i + 1]);
+                }
+            }
+
+            for (int i = 0; i < arr.Length - 1; i++)
+            {
+                if (Math.Abs(arr[i] - arr[i + 1]) == min)
+                {
+                    mins.Add(arr[i]);
+                    mins.Add(arr[i + 1]);
+                }
+            }
+            return mins.ToArray();
+        }
+
+        public static int theLoveLetterMystery(string s)
+        {
+            int counter = 0;
+            for (int i = 0, j = s.Length - 1; i < j; i++, j--)
+            {
+                counter += Math.Abs(s[j] - s[i]);
             }
             return counter;
         }
