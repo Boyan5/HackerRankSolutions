@@ -685,6 +685,35 @@ namespace ConsoleApp3
             string sTheLoveLetterMystery = "cba";
             Console.WriteLine(theLoveLetterMystery(sTheLoveLetterMystery));
             #endregion
+
+            //79 findMedian
+            #region
+            Console.WriteLine("Find Median");
+            List<int> arrFindMedian = new List<int>();
+            arrFindMedian.Add(0);
+            arrFindMedian.Add(1);
+            arrFindMedian.Add(2);
+            arrFindMedian.Add(4);
+            arrFindMedian.Add(6);
+            arrFindMedian.Add(5);
+            arrFindMedian.Add(3);
+            Console.WriteLine(findMedian(arrFindMedian));
+            #endregion
+
+            //80 anagram
+            #region
+            Console.WriteLine("Anagram");
+            string sAnagram = "asdfjoieufoa";
+            Console.WriteLine(anagram(sAnagram));
+            #endregion
+
+            //81 makingAnagrams
+            #region
+            Console.WriteLine("Making Anagrams");
+            string s1MakingAnagrams = "cde";
+            string s2MakingAnagrams = "abc";
+            Console.WriteLine(makingAnagrams(s1MakingAnagrams, s2MakingAnagrams));
+            #endregion
         }
 
         static int solveMeFirst(int a, int b)
@@ -2242,6 +2271,60 @@ namespace ConsoleApp3
             {
                 counter += Math.Abs(s[j] - s[i]);
             }
+            return counter;
+        }
+
+        public static int findMedian(List<int> arr)
+        {
+            var array = arr.ToArray();
+            Array.Sort(array);
+            return array[array.Length / 2];
+        }
+
+        public static int anagram(string s)
+        {
+            if (s.Length % 2 != 0)
+                return -1;
+            else
+            {
+                int n = s.Length / 2;
+                string s1;
+                string s2;
+                s1 = s.Substring(0, n);
+                s2 = s.Substring(n, s.Length - n);
+
+                foreach (char c in s2)
+                {
+                    if (s1.IndexOf(c) > -1)
+                    {
+                        s1 = s1.Remove(s1.IndexOf(c), 1);
+                    }
+                }
+                return s1.Length;
+            }
+        }
+
+        public static int makingAnagrams(string s1, string s2)
+        {
+            int[] frequencys1 = new int[26];
+            int[] frequencys2 = new int[26];
+            int counter = 0;
+
+            for (int i = 0; i < s1.Length; i++)
+            {
+                frequencys1[s1[i] - 97]++;
+            }
+
+            for (int i = 0; i < s2.Length; i++)
+            {
+                frequencys2[s2[i] - 97]++;
+            }
+
+            for (int i = 0; i < 26; i++)
+            {
+                counter += Math.Abs(frequencys1[i] - frequencys2[i]);
+            }
+
             return counter;
         }
     }
