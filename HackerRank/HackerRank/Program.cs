@@ -714,6 +714,28 @@ namespace ConsoleApp3
             string s2MakingAnagrams = "abc";
             Console.WriteLine(makingAnagrams(s1MakingAnagrams, s2MakingAnagrams));
             #endregion
+
+            //82 gameOfThrones
+            #region
+            Console.WriteLine("Game of Thrones");
+            string sGameOfThrones = "aaabbbb";
+            Console.WriteLine(gameOfThrones(sGameOfThrones));
+            #endregion
+
+            //83 twoStrings 
+            #region
+            Console.WriteLine("Two Strings");
+            string s1TwoStrings = "hello";
+            string s2TwoStrings = "worlds";
+            Console.WriteLine(twoStrings(s1TwoStrings, s2TwoStrings));
+            #endregion
+
+            //84 stringConstruction
+            #region
+            Console.WriteLine("String Construction");
+            string sStringConstruction = "abcd";
+            Console.WriteLine(stringConstruction(sStringConstruction));
+            #endregion
         }
 
         static int solveMeFirst(int a, int b)
@@ -2326,6 +2348,54 @@ namespace ConsoleApp3
             }
 
             return counter;
+        }
+
+        public static string gameOfThrones(string s)
+        {
+            string result = "";
+            int last = (int)'z';
+            int[] frequency = new int[last + 1];
+
+            for (int i = 0; i < s.Length; i++)
+            {
+                frequency[s[i]]++;
+            }
+            int counterEven = 0;
+            int counterOdd = 0;
+            for (int i = 0; i < frequency.Length; i++)
+            {
+                if (frequency[i] == 0)
+                    continue;
+                else if (frequency[i] % 2 == 0)
+                    counterEven++;
+                else
+                    counterOdd++;
+            }
+
+            if (counterOdd > 1)
+                result = "NO";
+            else
+                result = "YES";
+            return result;
+        }
+
+        public static string twoStrings(string s1, string s2)
+        {
+            if (s1.Intersect(s2).Any())
+            {
+                return "YES";
+            }
+            else
+            {
+                return "NO";
+            }
+        }
+
+        public static int stringConstruction(string s)
+        {
+            var distinct = s.Distinct();
+            var distinctArray = distinct.ToArray();
+            return distinctArray.Length;
         }
     }
 }
