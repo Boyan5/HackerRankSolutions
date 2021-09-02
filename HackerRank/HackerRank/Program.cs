@@ -736,6 +736,65 @@ namespace ConsoleApp3
             string sStringConstruction = "abcd";
             Console.WriteLine(stringConstruction(sStringConstruction));
             #endregion
+
+            //85 icecreamParlor
+            #region
+            Console.WriteLine("Icecream Parlor");
+            int mIcecreamParlor = 4;
+            List<int> arrIcecreamParlor = new List<int>();
+            arrIcecreamParlor.Add(1);
+            arrIcecreamParlor.Add(4);
+            arrIcecreamParlor.Add(5);
+            arrIcecreamParlor.Add(3);
+            arrIcecreamParlor.Add(2);
+            foreach (var aIcecreamParlor in icecreamParlor(mIcecreamParlor, arrIcecreamParlor))
+                Console.Write(aIcecreamParlor + " ");
+            Console.WriteLine();
+            #endregion
+
+            //86 missingNumbers 
+            #region
+            Console.WriteLine("Missing Numbers");
+            List<int> arrMissingNumbers = new List<int>();               
+            arrMissingNumbers.Add(203);
+            arrMissingNumbers.Add(204);
+            arrMissingNumbers.Add(205);
+            arrMissingNumbers.Add(206);
+            arrMissingNumbers.Add(207);
+            arrMissingNumbers.Add(208);
+            arrMissingNumbers.Add(203);
+            arrMissingNumbers.Add(204);
+            arrMissingNumbers.Add(205);
+            arrMissingNumbers.Add(206);
+            List<int> brrMissingNumbers = new List<int>();
+            brrMissingNumbers.Add(203);
+            brrMissingNumbers.Add(204);
+            brrMissingNumbers.Add(204);
+            brrMissingNumbers.Add(205);
+            brrMissingNumbers.Add(206);
+            brrMissingNumbers.Add(207);
+            brrMissingNumbers.Add(205);
+            brrMissingNumbers.Add(208);
+            brrMissingNumbers.Add(203);
+            brrMissingNumbers.Add(206);
+            brrMissingNumbers.Add(205);
+            brrMissingNumbers.Add(206);
+            brrMissingNumbers.Add(204);
+            foreach (var aMissingNumbers in missingNumbers(arrMissingNumbers, brrMissingNumbers))
+                Console.Write(aMissingNumbers + " ");
+            Console.WriteLine();
+            #endregion
+
+            //87 balancedSums
+            #region
+            Console.WriteLine("Balanced Sums");
+            List<int> arrBalancedSums = new List<int>();
+            arrBalancedSums.Add(1);
+            arrBalancedSums.Add(2);
+            arrBalancedSums.Add(3);
+            arrBalancedSums.Add(3);
+            Console.WriteLine(balancedSums(arrBalancedSums));
+            #endregion
         }
 
         static int solveMeFirst(int a, int b)
@@ -2396,6 +2455,61 @@ namespace ConsoleApp3
             var distinct = s.Distinct();
             var distinctArray = distinct.ToArray();
             return distinctArray.Length;
+        }
+
+        public static List<int> icecreamParlor(int m, List<int> arr)
+        {
+            List<int> indices = new List<int>();
+            for (int i = 0; i < arr.Count; i++)
+            {
+                for (int j = i + 1; j < arr.Count; j++)
+                {
+                    if (arr[i] + arr[j] == m)
+                    {
+                        indices.Add(i + 1);
+                        indices.Add(j + 1);
+                        return indices;
+                    }
+                }
+            }
+            return indices;
+        }
+
+        public static List<int> missingNumbers(List<int> arr, List<int> brr)
+        {
+            for (int i = 0; i < arr.Count; i++)
+            {
+                for (int j = 0; j < brr.Count; j++)
+                {
+                    if (arr[i] == brr[j])
+                    {
+                        brr.RemoveAt(j);
+                        break;
+                    }
+                }
+            }
+
+            return brr.Distinct().OrderBy(x => x).ToList();
+        }
+
+        public static string balancedSums(List<int> arr)
+        {
+            int x = 0;
+            int sum = 0;
+            foreach (int a in arr)
+            {
+                sum += a;
+            }
+
+            foreach (int y in arr)
+            {
+                if (2 * x == sum - y)
+                {
+                    return "YES";
+                }
+                x = x + y;
+            }
+            return "NO";
         }
     }
 }
