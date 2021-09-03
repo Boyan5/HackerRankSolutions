@@ -795,6 +795,38 @@ namespace ConsoleApp3
             arrBalancedSums.Add(3);
             Console.WriteLine(balancedSums(arrBalancedSums));
             #endregion
+
+            //88 minimumAbsoluteDifference
+            #region
+            Console.WriteLine("Minimum Absolute Difference");
+            List<int> arrMinimumAbsoluteDifference = new List<int>();
+            arrMinimumAbsoluteDifference.Add(3);
+            arrMinimumAbsoluteDifference.Add(-7);
+            arrMinimumAbsoluteDifference.Add(0);
+            Console.WriteLine(minimumAbsoluteDifference(arrMinimumAbsoluteDifference));
+            #endregion
+
+            //89 marcsCakewalk
+            #region
+            Console.WriteLine("Marcs Cakewalk");
+            List<int> calorieMarcsCakewalk = new List<int>();
+            calorieMarcsCakewalk.Add(1);
+            calorieMarcsCakewalk.Add(3);
+            calorieMarcsCakewalk.Add(2);
+            Console.WriteLine(marcsCakewalk(calorieMarcsCakewalk));
+            #endregion
+
+            //90 gridChallenge
+            #region
+            Console.WriteLine("Grid Challenge");
+            List<string> gridGridChallenge = new List<string>();
+            gridGridChallenge.Add("eabcd");
+            gridGridChallenge.Add("fghij");
+            gridGridChallenge.Add("olkmn");
+            gridGridChallenge.Add("trpqs");
+            gridGridChallenge.Add("xywuv");
+            Console.WriteLine(gridChallenge(gridGridChallenge));
+            #endregion
         }
 
         static int solveMeFirst(int a, int b)
@@ -2511,5 +2543,83 @@ namespace ConsoleApp3
             }
             return "NO";
         }
+
+        public static int minimumAbsoluteDifference(List<int> arr)
+        {
+            var sortArr = arr.ToArray();
+            Array.Sort(sortArr);
+
+            int min = int.MaxValue;
+
+            for (int i = 0; i < sortArr.Length - 1; i++)
+            {
+                int minDiff = sortArr[i + 1] - sortArr[i];
+
+                if (minDiff < min)
+                    min = minDiff;
+            }
+            return min;
+        }
+
+        public static long marcsCakewalk(List<int> calorie)
+        {
+            var arr2 = calorie.ToArray();
+            Array.Sort(arr2);
+            Array.Reverse(arr2);
+
+            long sum = 0;
+
+            for (int i = 0; i < arr2.Length; i++)
+            {
+                sum += (long)Math.Pow(2, i) * arr2[i];
+            }
+            return sum;
+        }
+
+        // gridChallenge
+        #region
+        public static string gridChallenge(List<string> grid)
+        {
+            List<string> sorted = new List<string>();
+            List<string> columns = new List<string>();
+
+            for (int i = 0; i < grid.Count; i++)
+            {
+                sorted.Add(SortString(grid[i]));
+            }
+
+            for (int i = 0; i < sorted[0].Length; i++)
+            {
+                string current = "";
+                for (int j = 0; j < sorted.Count; j++)
+                {
+                    current += sorted[j][i];
+
+                }
+                columns.Add(current);
+            }
+            for (int i = 0; i < columns.Count; i++)
+            {
+                for (int j = 0; j < columns[i].Length; j++)
+                {
+                    for (int k = j + 1; k < columns[i].Length; k++)
+                    {
+                        if (columns[i][j] > columns[i][k])
+                        {
+                            return "NO";
+                        }
+                    }
+                }
+            }
+            return "YES";
+        }
+
+        static string SortString(string input)
+        {
+            char[] characters = input.ToArray();
+            Array.Sort(characters);
+            return new string(characters);
+        }
+        #endregion
     }
 }
