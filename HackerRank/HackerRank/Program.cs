@@ -827,6 +827,65 @@ namespace ConsoleApp3
             gridGridChallenge.Add("xywuv");
             Console.WriteLine(gridChallenge(gridGridChallenge));
             #endregion
+
+            //91 luckBalance
+            #region
+            Console.WriteLine("Luck Balance");
+            int kLuckBalance = 3;
+            List<List<int>> contestsLuckBalance = new List<List<int>>();
+            List<int> lb1 = new List<int>();
+            lb1.Add(5);
+            lb1.Add(1);
+            List<int> lb2 = new List<int>();
+            lb2.Add(2);
+            lb2.Add(1);
+            List<int> lb3 = new List<int>();
+            lb3.Add(1);
+            lb3.Add(1);
+            List<int> lb4 = new List<int>();
+            lb4.Add(8);
+            lb4.Add(1);
+            List<int> lb5 = new List<int>();
+            lb5.Add(10);
+            lb5.Add(0);
+            List<int> lb6 = new List<int>();
+            lb6.Add(5);
+            lb6.Add(0);
+            contestsLuckBalance.Add(lb1);
+            contestsLuckBalance.Add(lb2);
+            contestsLuckBalance.Add(lb3);
+            contestsLuckBalance.Add(lb4);
+            contestsLuckBalance.Add(lb5);
+            contestsLuckBalance.Add(lb6);
+            Console.WriteLine(luckBalance(kLuckBalance, contestsLuckBalance));
+            #endregion
+
+            //92 toys
+            #region
+            Console.WriteLine("Toys");
+            List<int> wToys = new List<int>();
+            wToys.Add(1);
+            wToys.Add(2);
+            wToys.Add(3);
+            wToys.Add(21);
+            wToys.Add(7);
+            wToys.Add(12);
+            wToys.Add(14);
+            wToys.Add(21);
+            Console.WriteLine(toys(wToys));
+            #endregion
+
+            //93 minimumBribes
+            #region
+            Console.WriteLine("Minimum Bribes");
+            List<int> qMinimumBribes = new List<int>();
+            qMinimumBribes.Add(2);
+            qMinimumBribes.Add(5);
+            qMinimumBribes.Add(1);
+            qMinimumBribes.Add(3);
+            qMinimumBribes.Add(4);
+            minimumBribes(qMinimumBribes);
+            #endregion
         }
 
         static int solveMeFirst(int a, int b)
@@ -2621,5 +2680,104 @@ namespace ConsoleApp3
             return new string(characters);
         }
         #endregion
+
+        public static int luckBalance(int k, List<List<int>> contests)
+        {
+            List<int> ImportantfirstElements = new List<int>();
+            List<int> firstElementsCopy = new List<int>();
+            int totalLuckBalance = 0;
+            int counterOfImportantContests = 0;
+            int sumOfWins = 0;
+
+            for (int i = 0; i < contests.Count; i++)
+            {
+                for (int j = 1; j < contests[i].Count; j++)
+                {
+                    if (contests[i][j] == 1)
+                    {
+                        counterOfImportantContests++;
+                        ImportantfirstElements.Add(contests[i][0]);
+                    }
+                    firstElementsCopy.Add(contests[i][0]);
+                }
+            }
+
+
+
+            int neededWins = counterOfImportantContests - k;
+
+            for (int i = 0; i < neededWins; i++)
+            {
+                int min = ImportantfirstElements.Min();
+                int indexOfMin = ImportantfirstElements.IndexOf(min);
+                sumOfWins += min;
+                ImportantfirstElements.RemoveAt(indexOfMin);
+            }
+
+            for (int i = 0; i < firstElementsCopy.Count; i++)
+            {
+                totalLuckBalance += firstElementsCopy[i];
+            }
+            totalLuckBalance -= sumOfWins * 2;
+
+            return totalLuckBalance;
+        }
+
+        public static int toys(List<int> w)
+        {
+            w.Sort();
+            int currentUpperBound = w[0] + 4;
+            int counter = 0;
+            while (w.Count > 0)
+            {
+                if (w[0] <= currentUpperBound)
+                {
+                    w.Remove(w[0]);
+                }
+                else
+                {
+                    currentUpperBound = w[0] + 4;
+                    counter++;
+                }
+
+            }
+            return counter + 1;
+        }
+
+        public static void minimumBribes(List<int> q)
+        {
+            int totalBribes = 0;
+
+            int expectedFirst = 1;
+            int expectedSecond = 2;
+            int expectedThird = 3;
+
+            for (int i = 0; i < q.Count; i++)
+            {
+                if (q[i] == expectedFirst)
+                {
+                    expectedFirst = expectedSecond;
+                    expectedSecond = expectedThird;
+                    ++expectedThird;
+                }
+                else if (q[i] == expectedSecond)
+                {
+                    ++totalBribes;
+                    expectedSecond = expectedThird;
+                    ++expectedThird;
+                }
+                else if (q[i] == expectedThird)
+                {
+                    totalBribes += 2;
+                    ++expectedThird;
+                }
+                else
+                {
+                    Console.WriteLine("Too chaotic");
+                    return;
+                }
+            }
+            Console.WriteLine(totalBribes);
+        }
     }
 }
