@@ -886,12 +886,51 @@ namespace ConsoleApp3
             qMinimumBribes.Add(4);
             minimumBribes(qMinimumBribes);
             #endregion
+
+            //94 permutationEquation
+            #region
+            Console.WriteLine("Permutation Equation");
+            List<int> pPermutationEquation = new List<int>();
+            pPermutationEquation.Add(4);
+            pPermutationEquation.Add(3);
+            pPermutationEquation.Add(5);
+            pPermutationEquation.Add(1);
+            pPermutationEquation.Add(2);
+            foreach (var aPermutationEquation in permutationEquation(pPermutationEquation))
+                Console.WriteLine(aPermutationEquation);
+            #endregion
+
+            //95 acmTeam
+            #region
+            Console.WriteLine("ACM Team");
+            List<string> topicACMTeam = new List<string>();
+            topicACMTeam.Add("10101");
+            topicACMTeam.Add("11100");
+            topicACMTeam.Add("11010");
+            topicACMTeam.Add("00101");
+            foreach (var aACMTeam in acmTeam(topicACMTeam))
+                Console.WriteLine(aACMTeam);
+            #endregion
+
+            //96 maximumToys
+            #region
+            Console.WriteLine("Maximum Toys");
+            List<int> pricesMaximumToys = new List<int>();
+            pricesMaximumToys.Add(1);
+            pricesMaximumToys.Add(12);
+            pricesMaximumToys.Add(5);
+            pricesMaximumToys.Add(111);
+            pricesMaximumToys.Add(200);
+            pricesMaximumToys.Add(1000);
+            pricesMaximumToys.Add(10);
+            int kMaximumToys = 50;
+            Console.WriteLine(maximumToys(pricesMaximumToys, kMaximumToys));
+            #endregion
         }
 
         static int solveMeFirst(int a, int b)
         {
             return a + b;
-
         }
 
         static int simpleArraySum(int[] ar)
@@ -2778,6 +2817,78 @@ namespace ConsoleApp3
                 }
             }
             Console.WriteLine(totalBribes);
+        }
+
+        public static List<int> permutationEquation(List<int> p)
+        {
+            List<int> result = new List<int>();
+            int current = 1;
+            int currentIndex = -1;
+            for (int i = 0; i < p.Count; i++)
+            {
+                if (current == p[i])
+                {
+                    currentIndex = i + 1;
+                    current++;
+                    result.Add(p.IndexOf(currentIndex) + 1);
+                    i = -1;
+                }
+            }
+            return result;
+        }
+
+        public static List<int> acmTeam(List<string> topic)
+        {
+            List<int> numbersOfKnownTopics = new List<int>();
+            int counterOfKnownTopics = 0;
+            int numberOfTeamsKnowingMaxTopics = 0;
+            int maxKnownTopics = 0;
+
+            for (int i = 0; i < topic.Count - 1; i++)
+            {
+                for (int j = i + 1; j < topic.Count; j++)
+                {
+                    counterOfKnownTopics = 0;
+                    int k = 0;
+                    while (k < topic[0].Length)
+                    {
+                        if (topic[i][k].Equals('1') || topic[j][k].Equals('1'))
+                        {
+                            counterOfKnownTopics++;
+                        }
+                        k++;
+                    }
+                    numbersOfKnownTopics.Add(counterOfKnownTopics);
+                }
+            }
+
+            maxKnownTopics = numbersOfKnownTopics.Max();
+            for (int i = 0; i < numbersOfKnownTopics.Count; i++)
+            {
+                if (numbersOfKnownTopics[i] == maxKnownTopics)
+                    numberOfTeamsKnowingMaxTopics++;
+            }
+            List<int> result = new List<int>();
+            result.Add(maxKnownTopics);
+            result.Add(numberOfTeamsKnowingMaxTopics);
+
+            return result;
+        }
+
+        public static int maximumToys(List<int> prices, int k)
+        {
+            prices.Sort();
+            int cost = 0;
+            int counter = 0;
+            for (int i = 0; i < prices.Count; i++)
+            {
+                if (cost <= k)
+                {
+                    cost += prices[i];
+                    counter++;
+                }
+            }
+            return counter - 1;
         }
     }
 }
